@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new FOS\RestBundle\FOSRestBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new KnpU\GuardBundle\KnpUGuardBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

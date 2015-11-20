@@ -8,13 +8,15 @@
 namespace AppBundle\Entity;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+
 /**
  * Admin
  *
  * @ORM\Table(name="fos_admin")
  * @ORM\Entity
  */
-class Admin extends BaseUser
+class Admin extends BaseUser implements UserInterface
 {
     /**
      * @ORM\Id
@@ -106,4 +108,9 @@ class Admin extends BaseUser
     {
         return $this->lastName;
     }
+
+    /**
+     * @ORM\Column(type="string", unique=true)
+     */
+    private $apiToken;
 }
