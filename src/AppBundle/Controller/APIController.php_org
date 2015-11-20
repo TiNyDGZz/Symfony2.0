@@ -1,0 +1,58 @@
+<?php
+
+namespace AppBundle\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+class APIController extends Controller
+{
+    /**
+     * @Route("/api/students", name="api_student")
+     */
+    public function studentsAction()
+    {
+        $students = $this->getDoctrine()->getManager()
+            ->getRepository('AppBundle:Student')
+            ->findAll();
+
+        $json = $this->get('jms_serializer')->serialize($students, 'json');
+
+        return new Response($json, 200, [
+            'Content-Type' => 'application/json'
+        ]);
+    }
+
+    /**
+     * @Route("/api/grades", name="api_grades")
+     */
+    public function gradesAction()
+    {
+        $grades = $this->getDoctrine()->getManager()
+            ->getRepository('AppBundle:Grade')
+            ->findAll();
+
+        $json = $this->get('jms_serializer')->serialize($grades, 'json');
+
+        return new Response($json, 200, [
+            'Content-Type' => 'application/json'
+        ]);
+    }
+
+    /**
+     * @Route("/api/exams", name="api_exams")
+     */
+    public function examsAction()
+    {
+        $exams = $this->getDoctrine()->getManager()
+            ->getRepository('AppBundle:Exam')
+            ->findAll();
+
+        $json = $this->get('jms_serializer')->serialize($exams, 'json');
+
+        return new Response($json, 200, [
+            'Content-Type' => 'application/json'
+        ]);
+    }
+}
