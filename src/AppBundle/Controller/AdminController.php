@@ -46,10 +46,25 @@ class AdminController extends Controller
         $students = $this->getDoctrine()->getManager()->getRepository('AppBundle:Student')->findAll();
         $exams = $this->getDoctrine()->getManager()->getRepository('AppBundle:Exam')->findAll();
         $grades = $this->getDoctrine()->getManager()->getRepository('AppBundle:Grade')->findAll();
+        $admins = $this->getDoctrine()->getManager()->getRepository('AppBundle:Admin')->findAll();
         return $this->render('AppBundle:Admin:index.html.twig', [
             'students' => $students,
             'exams' => $exams,
             'grades' => $grades,
+            'admins' => $admins,
         ]);
+    }
+    /**
+     * @Route("/admin/delete/{id}", name="admin_delete")
+     */
+    public function deleteAction($id)
+    {
+        $db = $this->getDoctrine()->getManager();
+        $admin = $db
+            ->getRepository('AppBundle:Admin')
+            ->find($id);
+        $db->remove($admin);
+        $db->flush();
+        return $this->redirectToRoute('admin_list');
     }
 }

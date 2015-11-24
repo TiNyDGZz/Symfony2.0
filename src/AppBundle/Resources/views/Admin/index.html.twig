@@ -1,15 +1,21 @@
-<!doctype HTML>
-<html>
-<head>
-    <link href="../style/css/bootstrap.min.css" rel="stylesheet" media="screen">
-</head>
-<body>
+{% extends 'base.html.twig' %}
+
+{% block body %}
 <div class="container">
     <div class="row">
         <div class="col-md-2">
         </div>
         <div class="col-md-10">
+            {{ render(controller('FOSUserBundle:Security:login')) }}
+            <h1>Admin list</h1>
+            <ul>
+                {% for admin in admins %}
+                    <li>{{ admin.firstName }} - {{ admin.lastName }} <a
+                                href="{{ path('admin_delete', {id: admin.id }) }}">Delete Admin</a></li>
+                {% endfor %}
+            </ul>
             <h1>Students list</h1>
+
 
             <ul>
                 {% for student in students %}
@@ -37,12 +43,11 @@
             </ul>
             <a href="{{ path('grade_add') }}">Add Grade</a>
 
-            {{ render(controller('FOSUserBundle:Security:login')) }}
+
 
         </div>
     </div>
 </div>
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="../style/js/bootstrap.min.js"></script>
-</body>
-</html>
+{% endblock %}

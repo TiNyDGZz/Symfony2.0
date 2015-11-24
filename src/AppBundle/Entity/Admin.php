@@ -16,7 +16,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Table(name="fos_admin")
  * @ORM\Entity
  */
-class Admin extends BaseUser implements UserInterface
+class Admin extends BaseUser
 {
     /**
      * @ORM\Id
@@ -109,8 +109,5 @@ class Admin extends BaseUser implements UserInterface
         return $this->lastName;
     }
 
-    /**
-     * @ORM\Column(type="string", unique=true)
-     */
-    private $apiToken;
+
 }
